@@ -1,7 +1,10 @@
+const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+
 const {
   Schema,
   Types: { ObjectId },
-} = require('mongoose');
+} = mongoose;
 
 const Article = new Schema({
   title: { type: String, required: true, unique: true },
@@ -18,5 +21,7 @@ const Article = new Schema({
   articleImgAddress: { type: String },
   mention: { type: ObjectId, ref: 'User' },
 });
+
+Article.plugin(AutoIncrement, { inc_field: 'id' });
 
 module.exports = Article;

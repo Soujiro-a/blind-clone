@@ -6,6 +6,8 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
+const API = require('../api');
+
 const PORT = 3000;
 
 app.use(cors());
@@ -15,6 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', (req, res) => {
   res.send(`Hello, Express!`);
 });
+
+app.get('/article/:id', API.getArticle);
 
 app.listen(PORT, () => {
   console.log(`This Server is listening PORT:${PORT}`);
