@@ -35,10 +35,14 @@ router.post('/signup', async (req, res) => {
     password,
     company,
   }).save();
-
-  console.log(newUser);
   // eslint-disable-next-line no-underscore-dangle
   res.send(!!newUser._id);
 });
+
+// 유저 정보 변경
+
+// 유저 삭제
+
+// 프로필 이미지 추가
 
 module.exports = router;

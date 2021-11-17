@@ -9,8 +9,6 @@ router.post('/create', async (req, res) => {
   const newCompany = await Company({
     name,
   }).save();
-
-  console.log(newCompany);
   // eslint-disable-next-line no-underscore-dangle
   res.send(!!newCompany._id);
 });

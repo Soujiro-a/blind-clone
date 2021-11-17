@@ -6,7 +6,7 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const { article, user, company } = require('../router');
+const { article, board, company, comment, reply, user } = require('../router');
 
 const PORT = 3000;
 
@@ -16,8 +16,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // 기능별 라우터 추가
 app.use('/article', article);
-app.use('/user', user);
+app.use('/board', board);
+app.use('/comment', comment);
 app.use('/company', company);
+app.use('/reply', reply);
+app.use('/user', user);
 
 // 상태 확인용 루트 라우트
 app.use('/', (req, res) => {
