@@ -19,12 +19,13 @@ app.get("/favicon.ico", (req, res) => res.sendStatus(204));
 app.get("*", async (req, res) => {
   const requiredServerFetch = routes
     .filter((route) => matchPath(req.url, route.path))
-    .map((route) => route.component)
-    .filter((component) => component.serverFetch)
-    .map((component) => component.serverFetch);
+    .map((route) => route.element)
+    .filter((element) => element.serverFetch)
+    .map((element) => element.serverFetch);
   const data = await Promise.all(
     requiredServerFetch.map((fetchFn) => fetchFn())
   );
+
   const store = {
     data,
   };

@@ -2,7 +2,7 @@ import React from "react";
 import Home from "./Home";
 import About from "./About";
 import styled from "styled-components";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link, Routes, Route, useRoutes } from "react-router-dom";
 
 const Container = styled.div`
   background-color: #aaaaaa;
@@ -12,15 +12,20 @@ const Container = styled.div`
 export const routes = [
   {
     key: "home",
-    path: "/*",
-    component: Home,
+    path: "/",
+    element: <Home />,
   },
   {
     key: "about",
     path: "/about/*",
-    component: About,
+    element: <About />,
   },
 ];
+
+// export const routes = useRoutes([
+//   { path: "/", element: <Home /> },
+//   { path: "/about", element: <About /> },
+// ]);
 
 export default function App() {
   return (
@@ -35,7 +40,7 @@ export default function App() {
       </ul>
       <Routes>
         {routes.map((route) => (
-          <Route key={route.key} path={route.path} element={route.component} />
+          <Route {...route} />
         ))}
       </Routes>
     </Container>
