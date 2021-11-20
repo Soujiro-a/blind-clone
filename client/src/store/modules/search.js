@@ -1,9 +1,6 @@
 // 검색 결과 상태
 
-export const state = () => {
-  {
-  }
-};
+export const state = {};
 
 export const mutations = {};
 

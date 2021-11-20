@@ -3,11 +3,12 @@ import fs from "fs";
 import path from "path";
 import { renderToString } from "react-dom/server";
 import React from "react";
-import App, { routes } from "./App";
+import App from "./App";
 import { ServerStyleSheet } from "styled-components";
-import { matchPath } from "react-router-dom";
-import { StaticRouter } from "react-router-dom/server";
-import PreloadContext from "./lib/PreloadContext";
+import url from "url";
+import { createStore } from "redux";
+import rootReducer from "./store";
+import { Provider } from "react-redux";
 
 const app = express();
 const html = fs.readFileSync(
@@ -17,36 +18,33 @@ const html = fs.readFileSync(
 app.use("/dist", express.static("dist"));
 app.get("/favicon.ico", (req, res) => res.sendStatus(204));
 app.get("*", async (req, res) => {
-  const requiredServerFetch = routes
-    .filter((route) => matchPath(req.url, route.path))
-    .map((route) => route.element)
-    .filter((element) => element.serverFetch)
-    .map((element) => element.serverFetch);
-  const data = await Promise.all(
-    requiredServerFetch.map((fetchFn) => fetchFn())
-  );
-
-  const store = {
-    data,
-  };
-
+  const store = createStore(rootReducer);
+  const parsedUrl = url.parse(req.url, true);
+  const page = parsedUrl.pathname ? parsedUrl.pathname.substr(1) : "home";
   const sheet = new ServerStyleSheet();
 
-  const renderString = renderToString(
-    sheet.collectStyles(
-      <StaticRouter location={req.url} context={{}}>
-        <PreloadContext.Provider value={store}>
-          <App />
-        </PreloadContext.Provider>
-      </StaticRouter>
-    )
-  );
+  try {
+    const renderString = renderToString(
+      sheet.collectStyles(
+        <Provider store={store}>
+          <App data={page} />
+        </Provider>
+      )
+    );
 
-  const styles = sheet.getStyleTags();
-  const result = html
-    .replace('<div id="root"></div>', `<div id="root">${renderString}</div>`)
-    .replace("__DATA_FROM_SERVER__", JSON.stringify(store))
-    .replace("__STYLE_FROM_SERVER__", styles);
-  res.send(result);
+    const initialData = { page };
+    const preloadedState = JSON.stringify(store.getState());
+    const styles = sheet.getStyleTags();
+    const result = html
+      .replace('<div id="root"></div>', `<div id="root">${renderString}</div>`)
+      .replace("__DATA_FROM_SERVER__", JSON.stringify(initialData))
+      .replace("__STYLE_FROM_SERVER__", styles)
+      .replace("__REDUX_STATE_FROM_SERVER__", preloadedState);
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    sheet.seal();
+  }
 });
 app.listen(3000);
