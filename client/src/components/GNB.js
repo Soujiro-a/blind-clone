@@ -1,23 +1,24 @@
-import React from "react";
-import { Link, Routes, Route } from "react-router-dom";
-import LoginModal from "./modal/Login";
-import WritingModal from "./modal/Writing";
+import { Menu } from "semantic-ui-react";
 
 export default function GNB() {
+  const activeItem = "home";
   return (
-    <nav>
-      <div className="left-side">
-        <Link to="/">
-          <img src="../../public/main.png" alt="블라인드 로고" />
-        </Link>
-      </div>
-      <div className="right-side">
-        <LoginModal />
-        <WritingModal />
-      </div>
-      <Routes>
-        <Route path="/" />
-      </Routes>
-    </nav>
+    <Menu inverted>
+      <Menu.Item
+        name="home"
+        active={activeItem === "home"}
+        // onClick={this.handleItemClick}
+      />
+      <Menu.Item
+        name="messages"
+        active={activeItem === "messages"}
+        // onClick={this.handleItemClick}
+      />
+      <Menu.Item
+        name="friends"
+        active={activeItem === "friends"}
+        // onClick={this.handleItemClick}
+      />
+    </Menu>
   );
 }

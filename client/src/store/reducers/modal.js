@@ -1,3 +1,5 @@
+import { HYDRATE } from "next-redux-wrapper";
+
 // 액션 타입
 const LOGINOPEN = "modal/OPEN";
 const LOGIN_DIRECT_OPEN = "modal/DIRECT_OPEN";
@@ -30,6 +32,11 @@ const initState = {
 // 리듀서
 export default function modal(state = initState, action) {
   switch (action.type) {
+    case HYDRATE:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case LOGINOPEN:
       return Object.assign({}, state, {
         login: { show: true },
