@@ -1,4 +1,5 @@
 import Head from "next/head";
+import GNB from "../src/components/GNB";
 
 export default function Home() {
   return (
@@ -6,7 +7,7 @@ export default function Home() {
       <Head>
         <title>HOME | KKY</title>
       </Head>
-      create-next-app
+      <GNB />
     </div>
   );
 }

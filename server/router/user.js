@@ -7,7 +7,7 @@ const { User } = require('../mongoose/model');
 // eslint-disable-next-line consistent-return
 router.post('/signin', async (req, res) => {
   const { email, password } = req.body;
-  const loginUser = await User.find({ email });
+  const loginUser = await User.findOne({ email });
   // eslint-disable-next-line no-underscore-dangle
   if (!loginUser._id) {
     return res.send({
@@ -23,7 +23,12 @@ router.post('/signin', async (req, res) => {
     });
   }
 
-  res.send({ email: loginUser.email, nickname: loginUser.nickname });
+  res.send({
+    email: loginUser.email,
+    nickname: loginUser.nickname,
+    error: false,
+    message: '로그인 성공',
+  });
 });
 
 // 회원가입

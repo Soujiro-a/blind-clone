@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/globals.css";
-import "semantic-ui-css/semantic.min.css";
 import wrapper from "../src/store/configureStore";
+import GNB from "../src/components/GNB";
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;

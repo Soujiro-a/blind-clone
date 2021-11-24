@@ -1,14 +1,14 @@
 import { HYDRATE } from "next-redux-wrapper";
 
 // 액션 타입
-const LOGINOPEN = "modal/OPEN";
+const LOGIN_OPEN = "modal/OPEN";
 const LOGIN_DIRECT_OPEN = "modal/DIRECT_OPEN";
 const LOGIN_CLOSE = "modal/CLOSE";
 
 // 액션 생성 함수
 export function loginOpen() {
   return {
-    type: LOGINOPEN,
+    type: LOGIN_OPEN,
   };
 }
 
@@ -37,13 +37,13 @@ export default function modal(state = initState, action) {
         ...state,
         ...action.payload,
       };
-    case LOGINOPEN:
+    case LOGIN_OPEN:
       return Object.assign({}, state, {
-        login: { show: true },
+        login: { show: true, directLogin: false },
       });
     case LOGIN_DIRECT_OPEN:
       return Object.assign({}, state, {
-        login: { directLogin: true },
+        login: { show: true, directLogin: true },
       });
     case LOGIN_CLOSE:
       return Object.assign({}, state, {

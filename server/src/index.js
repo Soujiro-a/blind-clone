@@ -8,7 +8,7 @@ const cors = require('cors');
 const app = express();
 const { article, board, company, comment, reply, user } = require('../router');
 
-const PORT = 3000;
+const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
