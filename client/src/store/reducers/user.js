@@ -2,19 +2,12 @@ import { HYDRATE } from "next-redux-wrapper";
 
 // 액션 타입
 const SET_USER = "user/SET";
-const RESET_USER = "user/RESET";
 
 // 액션 생성 함수
 export function setUser(payload) {
   return {
     type: SET_USER,
     payload,
-  };
-}
-
-export function resetUser() {
-  return {
-    type: RESET_USER,
   };
 }
 
@@ -33,14 +26,14 @@ export default function user(state = initState, action) {
         ...action.payload,
       };
     case SET_USER:
+      if (action.payload.token) {
+        localStorage.setItem("token", action.payload.token);
+      } else {
+        localStorage.removeItem("token");
+      }
       return Object.assign({}, state, {
         email: action.payload.email,
         nickname: action.payload.nickname,
-      });
-    case RESET_USER:
-      return Object.assign({}, state, {
-        email: null,
-        nickname: null,
       });
     default:
       return state;

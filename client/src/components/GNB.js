@@ -7,6 +7,7 @@ import logoImg from "../../public/images/blind.png";
 import SmallSearchbar from "./GNB/SmallSearchbar";
 import { useDispatch, useSelector } from "react-redux";
 import { loginOpen } from "../store/reducers/modal";
+import { setUser } from "../store/reducers/user";
 import styles from "../../styles/components/GNB.module.css";
 import classNames from "classnames";
 
@@ -14,8 +15,6 @@ export default function GNB() {
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.user);
   const router = useRouter();
-
-  console.log(router);
 
   function clickWritingButton() {
     if (!loginState.email) {
@@ -26,7 +25,13 @@ export default function GNB() {
   function clickLoginButton() {
     if (!loginState.email) {
       dispatch(loginOpen());
+      return;
     }
+    logout();
+  }
+
+  function logout() {
+    dispatch(setUser({ email: null, nickname: null }));
   }
   return (
     <div className={styles["nav-container"]}>

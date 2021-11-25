@@ -1,6 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
+const { verify } = require('jsonwebtoken');
 const { Article, Comment } = require('../mongoose/model');
 
 // 개별 게시글 가져오기
@@ -13,15 +14,32 @@ router.get('/:id', async (req, res) => {
 
 // 게시글 추가
 router.post('/create', async (req, res) => {
-  const { author, title, content, board } = req.body;
-  const newArticle = await Article({
-    author,
-    title,
-    content,
-    board,
-  }).save();
+  const { title, content, board } = req.body;
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.send({
+      error: true,
+      message: '토큰이 존재하지 않음',
+    });
+  }
 
-  res.send(newArticle);
+  const token = authorization.split(' ')[1];
+  const secret = req.app.get('jwt-secret');
+  verify(token, secret, async (err, data) => {
+    if (err) {
+      return res.send(err);
+    }
+    const payload = {
+      author: data.id,
+      title,
+      content,
+      board,
+    };
+    const newArticle = await Article(payload).save();
+
+    return res.send(newArticle);
+  });
+  return null;
 });
 
 // 게시글 수정

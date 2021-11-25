@@ -56,17 +56,22 @@ export default function Login() {
   }
 
   async function loginWithEmail() {
-    const { data } = await axios.post("http://localhost:5000/user/signin", {
-      email,
-      password,
-    });
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/user/signin`,
+      {
+        email,
+        password,
+      }
+    );
 
     // 로그인 에러 캐치
     if (data.error) {
       return;
     }
 
-    dispatch(setUser({ email: data.email, nickname: data.nickname }));
+    dispatch(
+      setUser({ email: data.email, nickname: data.nickname, token: data.token })
+    );
     dispatch(loginClose());
   }
 

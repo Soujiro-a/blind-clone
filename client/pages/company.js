@@ -1,5 +1,4 @@
 import Head from "next/head";
-import GNB from "../src/components/GNB";
 
 export default function Company() {
   return (
@@ -7,7 +6,6 @@ export default function Company() {
       <Head>
         <title>Company | KKY</title>
       </Head>
-      <GNB />
     </div>
   );
 }
