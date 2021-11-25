@@ -9,6 +9,7 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 * {
@@ -24,8 +25,4 @@ a {
   background: rgba(0, 0, 0, 0.75);
   display: grid;
   place-content: center;
-}
-
-.close-btn {
-  cursor: pointer;
 }
