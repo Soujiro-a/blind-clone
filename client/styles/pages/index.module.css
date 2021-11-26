@@ -1,0 +1,17 @@
+.main-container {
+  display: flex;
+  margin: auto;
+  max-width: 1100px;
+}
+
+.main-container > main {
+  width: 100%;
+  max-width: 736px;
+}
+
+.board-card-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 45px 40px;
+}

@@ -1,0 +1,63 @@
+.board-card.best {
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head > a {
+  color: #222;
+  opacity: 0.2;
+  font-size: 14px;
+}
+
+.title-side > h2 {
+  font-size: 18px;
+  line-height: 43px;
+}
+
+.article-list {
+  padding-left: 0;
+  margin: 0;
+}
+
+.article-list > li {
+  list-style: none;
+  display: flex;
+  padding-top: 9px;
+}
+
+.article-list > li > span {
+  display: inline-block;
+  line-height: 20px;
+  color: #222;
+}
+
+.article-title {
+  width: calc(100% - 50px);
+}
+
+.count-display {
+  display: flex;
+  opacity: 0.4;
+  gap: 20px;
+}
+
+.count-item {
+  display: flex;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.board-tag {
+  font-size: 12px;
+  border: solid 1px #94969b;
+  color: #94969b;
+  margin-right: 5px;
+  position: relative;
+  top: -2px;
+}
