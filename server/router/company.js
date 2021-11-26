@@ -13,4 +13,11 @@ router.post('/create', async (req, res) => {
   res.send(!!newCompany._id);
 });
 
+// 인기있는 회사 목록 불러오기
+router.get('/list/famous', async (req, res) => {
+  const company = await Company.find().limit(10).sort({ realtimeScore: -1 });
+
+  return res.send(company);
+});
+
 module.exports = router;
