@@ -20,11 +20,11 @@ const initState = {
 // 리듀서
 export default function user(state = initState, action) {
   switch (action.type) {
-    case HYDRATE:
-      return {
-        ...state,
-        ...action.payload,
-      };
+    // case HYDRATE:
+    //   return {
+    //     ...state,
+    //     ...action.payload,
+    //   };
     case SET_USER:
       if (action.payload.token) {
         localStorage.setItem("token", action.payload.token);

@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import Head from "next/head";
 import BestBoardCard from "../src/components/Main/BestBoardCard";
@@ -6,7 +7,7 @@ import Searchbar from "../src/components/Searchbar";
 import RealtimeFamousCompany from "../src/components/Main/RealtimeFamousCompany";
 import styles from "../styles/pages/index.module.css";
 
-export default function Home({ mainContent, boardList, famousCompanyList }) {
+const Home = ({ mainContent, boardList, famousCompanyList }) => {
   return (
     <div>
       <Head>
@@ -30,23 +31,13 @@ export default function Home({ mainContent, boardList, famousCompanyList }) {
                 />
               );
             })}
-            {mainContent.map(({ title, slug, content }) => {
-              return (
-                <BoardCard
-                  key={slug}
-                  title={title}
-                  slug={slug}
-                  articleList={content}
-                />
-              );
-            })}
           </div>
         </main>
         <RealtimeFamousCompany famousCompanyList={famousCompanyList} />
       </div>
     </div>
   );
-}
+};
 
 export async function getServerSideProps() {
   const { data: contentData } = await axios.get(
@@ -82,3 +73,5 @@ export async function getServerSideProps() {
     },
   };
 }
+
+export default Home;
