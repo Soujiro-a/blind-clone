@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import logoImg from "../../public/images/blind.png";
 import SmallSearchbar from "./GNB/SmallSearchbar";
 import { useDispatch, useSelector } from "react-redux";
-import { loginOpen } from "../store/reducers/modal";
+import { loginOpen, writing } from "../store/reducers/modal";
 import { setUser } from "../store/reducers/user";
 import styles from "../../styles/components/GNB.module.css";
 import classNames from "classnames";
@@ -20,6 +20,7 @@ export default function GNB() {
     if (!loginState.email) {
       dispatch(loginOpen());
     }
+    dispatch(writing(true));
   }
 
   function clickLoginButton() {
@@ -76,7 +77,7 @@ export default function GNB() {
           </a>
         </div>
         <LoginModal />
-        {/* <WritingModal /> */}
+        <WritingModal />
       </nav>
     </div>
   );

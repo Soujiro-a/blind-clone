@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginClose, loginDirectOpen } from "../../store/reducers/modal";
 import { setUser } from "../../store/reducers/user";
 import Image from "next/image";
-import styles from "../../../styles/components/modal/login.module.css";
+import styles from "../../../styles/components/modal/Login.module.css";
 import cancelImg from "../../../public/images/cancel.png";
 import axios from "axios";
 

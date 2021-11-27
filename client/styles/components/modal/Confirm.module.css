@@ -1,0 +1,14 @@
+.confirm-modal {
+  width: 320px;
+  padding: 24px;
+  background: white;
+}
+
+.confirm {
+  background-color: #222;
+}
+
+.btn-container {
+  display: flex;
+  margin-top: 24px;
+}
