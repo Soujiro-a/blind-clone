@@ -3,7 +3,6 @@ import styles from "../../../styles/components/Main/BoardCard.module.css";
 import { MdThumbUp } from "react-icons/md";
 import { FaRegComment } from "react-icons/fa";
 import classNames from "classnames";
-import axios from "axios";
 
 export default function BestBoardCard({ articleList, boardList }) {
   return (
@@ -18,13 +17,7 @@ export default function BestBoardCard({ articleList, boardList }) {
           <div className={styles["board-icon"]}></div>
           <h2>토픽 베스트</h2>
         </div>
-        <Link
-          href={{
-            pathname: "/topics/[slug]",
-            query: { slug: "토픽-베스트" },
-          }}
-          passHref
-        >
+        <Link href={`/topics/${encodeURIComponent("토픽-베스트")}`} passHref>
           <a>더보기 {`>`}</a>
         </Link>
       </div>

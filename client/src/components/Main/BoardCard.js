@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "../../../styles/components/Main/BoardCard.module.css";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { BsEye } from "react-icons/bs";
 
 export default function BoardCard({ title, slug, articleList }) {
@@ -11,13 +10,7 @@ export default function BoardCard({ title, slug, articleList }) {
           <div className={styles["board-icon"]}></div>
           <h2>{title}</h2>
         </div>
-        <Link
-          href={{
-            pathname: "/topics/[slug]",
-            query: { slug },
-          }}
-          passHref
-        >
+        <Link href={`/topics/${encodeURIComponent(slug)}`} passHref>
           <a>더보기 {`>`}</a>
         </Link>
       </div>

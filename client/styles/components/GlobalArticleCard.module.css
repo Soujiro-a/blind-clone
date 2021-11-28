@@ -1,0 +1,56 @@
+.article {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.article:nth-child(2n - 1) {
+  border-right: 1px solid #eee;
+}
+
+.head {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1.4em;
+  margin-top: 1px;
+  height: 52px;
+  margin-bottom: 0;
+}
+
+.head > h5 {
+  margin: 0;
+}
+
+.content {
+  margin-top: 4px;
+  color: #222;
+  font-size: 14px;
+  line-height: 1.25em;
+}
+
+.info {
+  margin-top: 20px;
+  display: block;
+}
+
+.foot {
+  display: flex;
+  margin-top: 8px;
+  justify-content: space-between;
+  opacity: 0.4;
+}
+
+.count {
+  margin-right: 15px;
+}
+
+.icon {
+  position: relative;
+  top: 1px;
+  margin-right: 2px;
+}
+
+.icon-right {
+  position: relative;
+  top: 1px;
+  margin-left: 2px;
+}
