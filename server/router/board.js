@@ -61,8 +61,25 @@ router.get('/:slug', async (req, res) => {
     });
   }
   // eslint-disable-next-line no-underscore-dangle
-  const article = await Article.find({ board: board._id });
-  return res.send({ article, error: false, message: '성공' });
+  const article = await Article.find({ board: board._id }).populate({
+    path: 'author',
+    populate: { path: 'company' },
+  });
+
+  const formatedArticle = article.map((a) => ({
+    // eslint-disable-next-line no-underscore-dangle
+    ...a._doc,
+    author: {
+      // eslint-disable-next-line no-underscore-dangle
+      ...a._doc.author._doc,
+      nickname:
+        // eslint-disable-next-line no-underscore-dangle
+        a._doc.author.nickname[0] +
+        // eslint-disable-next-line no-underscore-dangle
+        '*'.repeat(a._doc.author.nickname.length - 1),
+    },
+  }));
+  return res.send({ article: formatedArticle, error: false, message: '성공' });
 });
 
 // 관리자: 게시판 추가
