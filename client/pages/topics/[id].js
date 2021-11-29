@@ -50,7 +50,9 @@ export async function getServerSideProps(context) {
   }
 
   const { data: articleList } = await axios.get(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/board/${encodeURI(context.query.id)}`
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/board/${encodeURI(
+      context.params.id
+    )}`
   );
 
   if (!Array.isArray(articleList.article)) {
