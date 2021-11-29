@@ -26,3 +26,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+.total {
+  padding: 20px 0 10px;
+  border-bottom: 2px solid #dbdee7;
+}

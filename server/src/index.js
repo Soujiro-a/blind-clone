@@ -6,7 +6,15 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const { article, board, company, comment, reply, user } = require('../router');
+const {
+  article,
+  board,
+  company,
+  comment,
+  reply,
+  search,
+  user,
+} = require('../router');
 
 const PORT = 5000;
 const SECRET = 'N@1U!@*!0@N7$6N0&*&N!6(*AJE@J';
@@ -24,6 +32,7 @@ app.use('/board', board);
 app.use('/comment', comment);
 app.use('/company', company);
 app.use('/reply', reply);
+app.use('/search', search);
 app.use('/user', user);
 
 // 상태 확인용 루트 라우트
