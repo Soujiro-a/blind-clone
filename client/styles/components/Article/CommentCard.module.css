@@ -1,0 +1,38 @@
+.comment {
+  padding: 12px 20px 19px;
+  border-bottom: 1px solid #eee;
+}
+
+.reply {
+  margin-top: -1px;
+  border-top: 1px solid #eee;
+  background-color: #f8f8f8;
+  padding-left: 40px;
+}
+
+.head {
+  margin-top: 9px;
+  color: #94969b;
+  font-size: 12px;
+  line-height: 1.33em;
+}
+
+.content {
+  white-space: pre-line;
+  padding: 10px 0;
+}
+
+.foot {
+  margin-top: 10px;
+  opacity: 0.4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.icon {
+  position: relative;
+  top: 1.5px;
+  margin-right: 5px;
+}

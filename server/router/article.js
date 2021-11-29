@@ -2,14 +2,77 @@ const express = require('express');
 
 const router = express.Router();
 const { verify } = require('jsonwebtoken');
-const { Article, Comment } = require('../mongoose/model');
+const { Article, Comment, Reply } = require('../mongoose/model');
 
 // 개별 게시글 가져오기
-router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  const article = await Article.findById(id);
-  const comment = await Comment.find({ article: id });
-  res.send({ article, comment });
+router.get('/:key', async (req, res) => {
+  const { key } = req.params;
+  const article = await Article.findOne({ key })
+    .populate({
+      path: 'author',
+      populate: { path: 'company' },
+    })
+    .populate('board');
+  // eslint-disable-next-line no-underscore-dangle
+  const commentList = await Comment.find({ article: article._id }).populate({
+    path: 'author',
+    populate: { path: 'company' },
+  });
+
+  Promise.all(
+    commentList.map(async (c) => {
+      // eslint-disable-next-line no-underscore-dangle
+      const replies = await Reply.find({ comment: c._doc._id }).populate({
+        path: 'author',
+        populate: { path: 'company' },
+      });
+      return {
+        // eslint-disable-next-line no-underscore-dangle
+        ...c._doc,
+        author: {
+          // eslint-disable-next-line no-underscore-dangle
+          ...c._doc.author._doc,
+          // eslint-disable-next-line no-underscore-dangle
+          nickname: `${c._doc.author._doc.nickname[0]}${'*'.repeat(
+            // eslint-disable-next-line no-underscore-dangle
+            c._doc.author._doc.nickname.length - 1
+          )}`,
+        },
+        replies: replies.map((r) => ({
+          // eslint-disable-next-line no-underscore-dangle
+          ...r._doc,
+          author: {
+            // eslint-disable-next-line no-underscore-dangle
+            ...r._doc.author._doc,
+            // eslint-disable-next-line no-underscore-dangle
+            nickname: `${r._doc.author._doc.nickname[0]}${'*'.repeat(
+              // eslint-disable-next-line no-underscore-dangle
+              r._doc.author._doc.nickname.length - 1
+            )}`,
+          },
+        })),
+      };
+    })
+  )
+    .then((comment) => {
+      res.send({
+        article: {
+          // eslint-disable-next-line no-underscore-dangle
+          ...article._doc,
+          author: {
+            // eslint-disable-next-line no-underscore-dangle
+            ...article._doc.author._doc,
+            // eslint-disable-next-line no-underscore-dangle
+            nickname: `${article._doc.author._doc.nickname[0]}${'*'.repeat(
+              // eslint-disable-next-line no-underscore-dangle
+              article._doc.author._doc.nickname.length - 1
+            )}`,
+          },
+        },
+        comment,
+      });
+    })
+    .catch(() => {});
 });
 
 // 게시글 추가

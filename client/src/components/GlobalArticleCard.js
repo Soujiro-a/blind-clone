@@ -2,7 +2,7 @@ import styles from "../../styles/components/GlobalArticleCard.module.css";
 import { MdThumbUp } from "react-icons/md";
 import { FaRegComment } from "react-icons/fa";
 import { BsEye, BsBookmark } from "react-icons/bs";
-import timeGap from "../function/time";
+import timeGap from "../function/timeGap";
 import Link from "next/link";
 
 export default function GlobalArticleCard({ article }) {

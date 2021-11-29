@@ -1,19 +1,43 @@
 const express = require('express');
 
 const router = express.Router();
-const { Reply } = require('../mongoose/model');
+const { verify } = require('jsonwebtoken');
+const { Comment, Reply } = require('../mongoose/model');
 
 //  대댓글 생성하기
 router.post('/create', async (req, res) => {
-  const { author, comment, content } = req.body;
-  const newReply = await Reply({
-    author,
-    comment,
-    content,
-  }).save();
+  const { comment, content } = req.body;
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.send({
+      error: true,
+      message: '토큰이 존재하지 않음',
+    });
+  }
 
-  // eslint-disable-next-line no-underscore-dangle
-  res.send(!!newReply._id);
+  const token = authorization.split(' ')[1];
+  const secret = req.app.get('jwt-secret');
+  verify(token, secret, async (err, data) => {
+    if (err) {
+      return res.send(err);
+    }
+    const newReply = await Reply({
+      author: data.id,
+      comment,
+      content,
+    }).save();
+
+    await Comment.findOneAndUpdate(
+      { _id: comment },
+      {
+        $inc: { replyCount: 1 },
+      }
+    );
+
+    // eslint-disable-next-line no-underscore-dangle
+    return res.send(!!newReply._id);
+  });
+  return null;
 });
 
 // 대댓글 수정하기

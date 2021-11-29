@@ -1,0 +1,49 @@
+.main-container {
+  display: flex;
+  margin: auto;
+  max-width: 1100px;
+}
+
+.main-container > main {
+  width: 100%;
+  max-width: 736px;
+}
+
+.main-container > main > h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.company {
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.info {
+  opacity: 0.4;
+  color: #222;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.left,
+.right {
+  display: flex;
+  gap: 20px;
+}
+
+.icon,
+.action {
+  position: relative;
+  top: 1.5px;
+  margin-right: 5px;
+}
+
+.content {
+  padding: 30px 0;
+  white-space: pre-line;
+  line-height: 28px;
+}

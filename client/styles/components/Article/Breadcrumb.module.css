@@ -1,0 +1,10 @@
+.breadcrumb {
+  padding: 40px 0 20px;
+}
+
+.breadcrumb > a {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  color: #222;
+}

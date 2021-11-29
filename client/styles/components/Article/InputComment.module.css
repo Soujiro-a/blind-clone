@@ -1,0 +1,47 @@
+.input-comment {
+  display: flex;
+  padding: 20px;
+  border: 1px solid #d4d4d4;
+}
+
+.icon {
+  margin-right: 15px;
+}
+
+.empty {
+  line-height: 40px;
+  cursor: pointer;
+}
+
+.content-container {
+  width: 100%;
+}
+
+.textarea {
+  resize: none;
+  width: 100%;
+  display: block;
+  border: none;
+  font-size: 16px;
+  min-height: 100px;
+  margin-bottom: 20px;
+}
+
+.textarea::placeholder {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.foot > a {
+  color: #d4d4d4;
+}
+
+.active {
+  color: #222222 !important;
+}
