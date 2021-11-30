@@ -6,10 +6,24 @@ const { Article } = require('../mongoose/model');
 // 게시글 검색 결과를 반환
 router.get('/:q', async (req, res) => {
   const { q } = req.params;
-  const article = await Article.find({ title: { $regex: q } }).populate({
-    path: 'author',
-    populate: { path: 'company' },
-  });
+  const { lastIndex } = req.query; // 무한 스크롤 구현 시 사용할 부분
+
+  const findOption = {
+    title: { $regex: q },
+  };
+
+  if (lastIndex !== undefined) {
+    // eslint-disable-next-line no-underscore-dangle
+    findOption._id = { $lt: lastIndex };
+  }
+
+  const article = await Article.find(findOption)
+    .sort({ _id: -1 })
+    .limit(6)
+    .populate({
+      path: 'author',
+      populate: { path: 'company' },
+    });
 
   const formatedArticle = article.map((a) => ({
     // eslint-disable-next-line no-underscore-dangle

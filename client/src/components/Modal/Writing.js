@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../../../styles/components/modal/Writing.module.css";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import ConfirmModal from "./Confirm";
 
 export default function Writing() {
   const dispatch = useDispatch();
+  const imgref = useRef();
   const writingModalState = useSelector((state) => state.modal.writing);
   const [boardList, setBoardList] = useState([]);
   const [currentSelectedBoard, setCurrentSelectedBoard] = useState(0);
@@ -25,6 +26,7 @@ export default function Writing() {
   });
 
   const { title, content } = article;
+  const [imgFile, setImgFile] = useState("");
 
   function onChangeInput(e) {
     const { name, value } = e.target;
@@ -76,6 +78,7 @@ export default function Writing() {
         title,
         content,
         board: boardList[currentSelectedBoard]._id,
+        image: imgFile,
       },
       {
         headers: {
@@ -94,6 +97,26 @@ export default function Writing() {
 
   function listenConfirm(confirm) {
     confirm ? uploadArticle() : closeConfirmModal();
+  }
+
+  function clickCamera() {
+    imgref.current.click();
+  }
+
+  function uploadImage(e) {
+    let formData = new FormData();
+    let file = e.target.files[0];
+    formData.append("file", file);
+    setTimeout(async () => {
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/upload`,
+        formData
+      );
+      if (!data || data.error) {
+        return;
+      }
+      setImgFile(data.key);
+    }, 300);
   }
   return (
     writingModalState && (
@@ -168,10 +191,28 @@ export default function Writing() {
                 ></textarea>
               </div>
               <div className={styles["foot"]}>
-                <AiOutlineCamera size={45} className={styles["icon"]} />
-                <FiBarChart2 size={45} className={styles["icon"]} />
-                <FiAtSign size={45} className={styles["icon"]} />
-                <FiHash size={45} className={styles["icon"]} />
+                <a
+                  onClick={() => {
+                    clickCamera();
+                  }}
+                >
+                  <AiOutlineCamera size={45} className={styles["icon"]} />
+                </a>
+                <a>
+                  <FiBarChart2 size={45} className={styles["icon"]} />
+                </a>
+                <a>
+                  <FiAtSign size={45} className={styles["icon"]} />
+                </a>
+                <a>
+                  <FiHash size={45} className={styles["icon"]} />
+                </a>
+                <input
+                  type="file"
+                  ref={imgref}
+                  onChange={uploadImage}
+                  className="hide"
+                />
               </div>
             </div>
           )}
