@@ -60,11 +60,24 @@ router.get('/:slug', async (req, res) => {
       message: '존재하지 않는 게시판',
     });
   }
-  // eslint-disable-next-line no-underscore-dangle
-  const article = await Article.find({ board: board._id }).populate({
-    path: 'author',
-    populate: { path: 'company' },
-  });
+
+  const findOption = {
+    // eslint-disable-next-line no-underscore-dangle
+    board: board._id,
+  };
+
+  if (lastIndex !== undefined) {
+    // eslint-disable-next-line no-underscore-dangle
+    findOption._id = { $lt: lastIndex };
+  }
+
+  const article = await Article.find(findOption)
+    .sort({ _id: -1 })
+    .limit(6)
+    .populate({
+      path: 'author',
+      populate: { path: 'company' },
+    });
 
   const formatedArticle = article.map((a) => ({
     // eslint-disable-next-line no-underscore-dangle

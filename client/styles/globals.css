@@ -38,3 +38,7 @@ a {
   color: #fff;
   border: none;
 }
+
+.hide {
+  display: none;
+}

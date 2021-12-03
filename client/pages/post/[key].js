@@ -1,4 +1,5 @@
 import styles from "../../styles/pages/post/key.module.css";
+import Image from "next/image";
 import axios from "axios";
 import Breadcrumb from "../../src/components/Article/Breadcrumb";
 import CommentCard from "../../src/components/Article/CommentCard";
@@ -49,6 +50,16 @@ export default function Key({ article, comment }) {
           </div>
         </div>
         <div className={styles["content"]}>{article.content}</div>
+        {article.articleImgAddress && (
+          <picture className={styles["article-image"]}>
+            <Image
+              src={`https://blind-clone-nextjs.s3.ap-northeast-2.amazonaws.com/${article.articleImgAddress}`}
+              alt={`${article.articleImgAddress}`}
+              width={450}
+              height={450}
+            />
+          </picture>
+        )}
         <div className={styles["action"]}>
           <div className={styles["left"]}>
             <span>
