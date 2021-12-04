@@ -41,7 +41,7 @@
 - 기존 루트 페이지에서 매번 게시판 순서가 뒤죽박죽인 상태였습니다.
   - 데이터를 게시판의 고유 id 순서대로 정렬하여 받아옴으로서 해결하였습니다.
 
-:pushpin: [코드 확인](https://github.com/Soujiro-a/blind-clone/blob/c9dc1addb10f321a3996f7c119a772314fcc6cba/server/router/board.js#L33)
+:pushpin: [코드 확인](bit.ly/3EjPknQ)
 
 </div>
 </details>
