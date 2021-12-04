@@ -7,6 +7,7 @@ import GlobalArticleCard from "../../src/components/GlobalArticleCard";
 
 export default function Id({ boardList, articleList }) {
   const router = useRouter();
+  const { id } = router.query;
   return (
     <div className={styles["main-container"]}>
       {boardList.length > 0 && (
@@ -21,7 +22,7 @@ export default function Id({ boardList, articleList }) {
                 <a
                   className={classNames({
                     [styles["board-item"]]: true,
-                    [styles["active"]]: router.query.id === board.slug,
+                    [styles["active"]]: id === board.slug,
                   })}
                 >
                   {board.title}

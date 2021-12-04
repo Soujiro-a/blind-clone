@@ -15,6 +15,7 @@ export default function GNB() {
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.user);
   const router = useRouter();
+  const { pathname } = router;
 
   function clickWritingButton() {
     if (!loginState.email) {
@@ -47,7 +48,7 @@ export default function GNB() {
             <a
               className={classNames({
                 [styles["text-menu"]]: true,
-                [styles["active"]]: router.pathname === "/",
+                [styles["active"]]: pathname === "/",
               })}
             >
               홈
@@ -57,7 +58,7 @@ export default function GNB() {
             <a
               className={classNames({
                 [styles["text-menu"]]: true,
-                [styles["active"]]: router.pathname === "/company",
+                [styles["active"]]: pathname === "/company",
               })}
             >
               기업 리뷰

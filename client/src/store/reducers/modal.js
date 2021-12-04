@@ -41,11 +41,11 @@ const initState = {
 // 리듀서
 export default function modal(state = initState, action) {
   switch (action.type) {
-    // case HYDRATE:
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   };
+    case HYDRATE:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case LOGIN_OPEN:
       return Object.assign({}, state, {
         login: { show: true, directLogin: false },

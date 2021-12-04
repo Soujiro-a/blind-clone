@@ -30,7 +30,21 @@ router.get('/main', async (req, res) => {
     })
   )
     .then(() => {
-      res.send({ content: mainContent, error: false, message: '성공' });
+      res.send({
+        content: mainContent.sort((a, b) => {
+          // eslint-disable-next-line no-underscore-dangle
+          if (a._id < b._id) {
+            return -1;
+          }
+          // eslint-disable-next-line no-underscore-dangle
+          if (a._id > b._id) {
+            return 1;
+          }
+          return 0;
+        }),
+        error: false,
+        message: '성공',
+      });
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
