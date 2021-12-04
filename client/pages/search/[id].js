@@ -5,10 +5,11 @@ import GlobalArticleCard from "../../src/components/GlobalArticleCard";
 
 export default function Query({ articleList }) {
   const router = useRouter();
+  const { id } = router.query;
   return (
     <div className={styles["main-container"]}>
       <section>
-        <strong>{router.query.id} </strong>
+        <strong>{id} </strong>
         검색결과
       </section>
       <section className={styles["total"]}>전체({articleList.length})</section>

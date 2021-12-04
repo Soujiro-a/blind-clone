@@ -40,7 +40,7 @@ const Home = ({ mainContent, boardList, famousCompanyList }) => {
 };
 
 export async function getServerSideProps() {
-  const { data: contentData } = await axios.get(
+  let { data: contentData } = await axios.get(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/board/main`
   );
   if (contentData.error) {
