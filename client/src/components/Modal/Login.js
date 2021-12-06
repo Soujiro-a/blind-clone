@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginClose, loginDirectOpen } from "../../store/reducers/modal";
-import { setUser } from "../../store/reducers/user";
+import { loginClose, loginDirectOpen } from "../../store/modules/modal";
+import { setUser } from "../../store/modules/user";
 import Image from "next/image";
 import styles from "../../../styles/components/modal/Login.module.css";
 import cancelImg from "../../../public/images/cancel.png";

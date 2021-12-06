@@ -45,3 +45,29 @@
 
 </div>
 </details>
+
+<details>
+<summary>Error: Counter already defined for field</summary>
+<div markdown="1">
+
+- mongoose-sequence 패키지를 사용하여 autoincrement를 생성하다 발생한 오류입니다.
+- NodeJS 기반 서버에서는 발생하지 않던 오류였으나, NextJS로 서버를 통합하는 과정에서 발생하였습니다.
+- autoincrement 생성 전에 컬렉션이 존재하지 않을때만 생성하도록 조건을 걸어주어 중복생성을 방지할 수 있었습니다.
+
+:pushpin: [참고 링크](https://github.com/ramiel/mongoose-sequence/issues/100)
+:pushpin: [코드 확인]()
+
+</div>
+</details>
+
+<details>
+<summary>localStorage 사용 문제</summary>
+<div markdown="1">
+
+-
+
+:pushpin: [참고 링크]()
+:pushpin: [코드 확인]()
+
+</div>
+</details>

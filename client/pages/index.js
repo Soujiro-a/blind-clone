@@ -6,6 +6,8 @@ import BoardCard from "../src/components/Main/BoardCard";
 import Searchbar from "../src/components/Searchbar";
 import RealtimeFamousCompany from "../src/components/Main/RealtimeFamousCompany";
 import styles from "../styles/pages/index.module.css";
+import { setUser } from "../src/store/modules/user";
+import wrapper from "../src/store/configureStore";
 
 const Home = ({ mainContent, boardList, famousCompanyList }) => {
   return (
@@ -39,39 +41,42 @@ const Home = ({ mainContent, boardList, famousCompanyList }) => {
   );
 };
 
-export async function getServerSideProps() {
-  let { data: contentData } = await axios.get(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/board/main`
-  );
-  if (contentData.error) {
-    return;
-  }
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req, res, ...etc }) => {
+      let { data: contentData } = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/board/main`
+      );
+      if (contentData.error) {
+        return;
+      }
 
-  const { data: listData } = await axios.get(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/board/list`
-  );
+      const { data: listData } = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/board/list`
+      );
 
-  if (!Array.isArray(listData)) {
-    return;
-  }
+      if (!Array.isArray(listData)) {
+        return;
+      }
 
-  const boardList = {};
+      const boardList = {};
 
-  listData.forEach((v) => {
-    boardList[v._id] = v.title;
-  });
+      listData.forEach((v) => {
+        boardList[v._id] = v.title;
+      });
 
-  const { data: famousCompanyList } = await axios.get(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/company/list/famous`
-  );
+      const { data: famousCompanyList } = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/company/list/famous`
+      );
 
-  return {
-    props: {
-      mainContent: contentData.content,
-      boardList,
-      famousCompanyList,
-    },
-  };
-}
+      return {
+        props: {
+          mainContent: contentData.content,
+          boardList,
+          famousCompanyList,
+        },
+      };
+    }
+);
 
 export default Home;

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../../../styles/components/modal/Writing.module.css";
 import Image from "next/image";
-import { writing } from "../../store/reducers/modal";
+import { writing } from "../../store/modules/modal";
 import cancelImg from "../../../public/images/cancel.png";
 import axios from "axios";
 import { MdKeyboardArrowDown } from "react-icons/md";

@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import logoImg from "../../public/images/blind.png";
 import SmallSearchbar from "./GNB/SmallSearchbar";
 import { useDispatch, useSelector } from "react-redux";
-import { loginOpen, writing } from "../store/reducers/modal";
-import { setUser } from "../store/reducers/user";
+import { loginOpen, writing } from "../store/modules/modal";
+import { setUser } from "../store/modules/user";
 import styles from "../../styles/components/GNB.module.css";
 import classNames from "classnames";
 
