@@ -42,10 +42,10 @@ const initState = {
 export default function modal(state = initState, action) {
   switch (action.type) {
     case HYDRATE:
-      return {
-        ...state,
-        ...action.payload,
-      };
+      return Object.assign({}, state, {
+        login: action.payload.modal.login,
+        writing: action.payload.modal.writing,
+      });
     case LOGIN_OPEN:
       return Object.assign({}, state, {
         login: { show: true, directLogin: false },

@@ -28,7 +28,6 @@ const model = (() => {
       models[key] = mongoose.model(key, schema[key]);
     }
   }
-
   return models;
 })();
 
