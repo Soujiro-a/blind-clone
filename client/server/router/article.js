@@ -13,7 +13,6 @@ router.get("/:key", async (req, res) => {
       populate: { path: "company" },
     })
     .populate("board");
-  // eslint-disable-next-line no-underscore-dangle
   const commentList = await Comment.find({ article: article._id }).populate({
     path: "author",
     populate: { path: "company" },
@@ -21,32 +20,23 @@ router.get("/:key", async (req, res) => {
 
   Promise.all(
     commentList.map(async (c) => {
-      // eslint-disable-next-line no-underscore-dangle
       const replies = await Reply.find({ comment: c._doc._id }).populate({
         path: "author",
         populate: { path: "company" },
       });
       return {
-        // eslint-disable-next-line no-underscore-dangle
         ...c._doc,
         author: {
-          // eslint-disable-next-line no-underscore-dangle
           ...c._doc.author._doc,
-          // eslint-disable-next-line no-underscore-dangle
           nickname: `${c._doc.author._doc.nickname[0]}${"*".repeat(
-            // eslint-disable-next-line no-underscore-dangle
             c._doc.author._doc.nickname.length - 1
           )}`,
         },
         replies: replies.map((r) => ({
-          // eslint-disable-next-line no-underscore-dangle
           ...r._doc,
           author: {
-            // eslint-disable-next-line no-underscore-dangle
             ...r._doc.author._doc,
-            // eslint-disable-next-line no-underscore-dangle
             nickname: `${r._doc.author._doc.nickname[0]}${"*".repeat(
-              // eslint-disable-next-line no-underscore-dangle
               r._doc.author._doc.nickname.length - 1
             )}`,
           },
@@ -57,14 +47,10 @@ router.get("/:key", async (req, res) => {
     .then((comment) => {
       res.send({
         article: {
-          // eslint-disable-next-line no-underscore-dangle
           ...article._doc,
           author: {
-            // eslint-disable-next-line no-underscore-dangle
             ...article._doc.author._doc,
-            // eslint-disable-next-line no-underscore-dangle
             nickname: `${article._doc.author._doc.nickname[0]}${"*".repeat(
-              // eslint-disable-next-line no-underscore-dangle
               article._doc.author._doc.nickname.length - 1
             )}`,
           },
@@ -143,7 +129,6 @@ router.delete("/delete/soft", async (req, res) => {
       author,
     },
     {
-      // eslint-disable-next-line new-cap
       deleteTeime: new Date.getTime() + 30 * 24 * 60 * 60 * 1000, // 30일 후의 시간이 저장
     }
   );

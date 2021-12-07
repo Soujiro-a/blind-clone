@@ -21,16 +21,11 @@ const initState = {
 export default function user(state = initState, action) {
   switch (action.type) {
     case HYDRATE:
-      return {
-        ...state,
-        ...action.payload,
-      };
+      return Object.assign({}, state, {
+        email: action.payload.user.email,
+        nickname: action.payload.user.nickname,
+      });
     case SET_USER:
-      if (action.payload.token) {
-        localStorage.setItem("token", action.payload.token);
-      } else {
-        localStorage.removeItem("token");
-      }
       return Object.assign({}, state, {
         email: action.payload.email,
         nickname: action.payload.nickname,

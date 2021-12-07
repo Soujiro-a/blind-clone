@@ -44,6 +44,11 @@ const Home = ({ mainContent, boardList, famousCompanyList }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, res, ...etc }) => {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/user/token`
+      );
+      store.dispatch(setUser({ email: data.email, nickname: data.nickname }));
+
       let { data: contentData } = await axios.get(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/board/main`
       );

@@ -5,11 +5,9 @@ const { sign, verify } = require("jsonwebtoken");
 const { User } = require("../../mongoose/model");
 
 // 로그인
-// eslint-disable-next-line consistent-return
 router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   const loginUser = await User.findOne({ email });
-  // eslint-disable-next-line no-underscore-dangle
   if (!loginUser._id) {
     return res.send({
       error: true,
@@ -25,7 +23,6 @@ router.post("/signin", async (req, res) => {
   }
   const secret = req.app.get("jwt-secret");
   const token = sign(
-    // eslint-disable-next-line no-underscore-dangle
     { id: loginUser._id, email: loginUser.email, nickname: loginUser.nickname },
     secret,
     {
@@ -53,7 +50,6 @@ router.post("/signup", async (req, res) => {
     password,
     company,
   }).save();
-  // eslint-disable-next-line no-underscore-dangle
   res.send(!!newUser._id);
 });
 

@@ -34,7 +34,6 @@ router.post("/create", async (req, res) => {
       }
     );
 
-    // eslint-disable-next-line no-underscore-dangle
     return res.send(!!newReply._id);
   });
   return null;
@@ -77,7 +76,6 @@ router.delete("/delete/soft", async (req, res) => {
       author,
     },
     {
-      // eslint-disable-next-line new-cap
       deleteTeime: new Date.getTime() + 30 * 24 * 60 * 60 * 1000, // 30일 후의 시간이 저장
     }
   );

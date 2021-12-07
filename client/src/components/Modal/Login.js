@@ -6,6 +6,7 @@ import Image from "next/image";
 import styles from "../../../styles/components/modal/Login.module.css";
 import cancelImg from "../../../public/images/cancel.png";
 import axios from "axios";
+import setToken from "../../../server/tokenManager";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -68,6 +69,8 @@ export default function Login() {
     if (data.error) {
       return;
     }
+
+    setToken(data.token);
 
     dispatch(
       setUser({ email: data.email, nickname: data.nickname, token: data.token })

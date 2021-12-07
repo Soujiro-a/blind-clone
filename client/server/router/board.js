@@ -16,13 +16,11 @@ router.get("/main", async (req, res) => {
   const mainContent = [];
   Promise.all(
     board.map(async (b) => {
-      // eslint-disable-next-line no-underscore-dangle
       const recentArticles = await Article.find({ board: b._id });
       if (!Array.isArray(recentArticles)) {
         return false;
       }
       mainContent.push({
-        // eslint-disable-next-line no-underscore-dangle
         ...b._doc,
         content: recentArticles,
       });
@@ -32,11 +30,9 @@ router.get("/main", async (req, res) => {
     .then(() => {
       res.send({
         content: mainContent.sort((a, b) => {
-          // eslint-disable-next-line no-underscore-dangle
           if (a._id < b._id) {
             return -1;
           }
-          // eslint-disable-next-line no-underscore-dangle
           if (a._id > b._id) {
             return 1;
           }
@@ -47,7 +43,6 @@ router.get("/main", async (req, res) => {
       });
     })
     .catch((err) => {
-      // eslint-disable-next-line no-console
       console.error(err);
       res.send({ content: null, error: true, message: "서버 에러" });
     });
@@ -66,7 +61,6 @@ router.get("/:slug", async (req, res) => {
   const { lastIndex } = req.query; // 무한 스크롤 구현 시 사용할 부분
 
   const board = await Board.findOne({ slug });
-  // eslint-disable-next-line no-underscore-dangle
   if (!board._id) {
     return res.send({
       article: [],
@@ -76,12 +70,10 @@ router.get("/:slug", async (req, res) => {
   }
 
   const findOption = {
-    // eslint-disable-next-line no-underscore-dangle
     board: board._id,
   };
 
   if (lastIndex !== undefined) {
-    // eslint-disable-next-line no-underscore-dangle
     findOption._id = { $lt: lastIndex };
   }
 
@@ -94,15 +86,11 @@ router.get("/:slug", async (req, res) => {
     });
 
   const formatedArticle = article.map((a) => ({
-    // eslint-disable-next-line no-underscore-dangle
     ...a._doc,
     author: {
-      // eslint-disable-next-line no-underscore-dangle
       ...a._doc.author._doc,
       nickname:
-        // eslint-disable-next-line no-underscore-dangle
         a._doc.author.nickname[0] +
-        // eslint-disable-next-line no-underscore-dangle
         "*".repeat(a._doc.author.nickname.length - 1),
     },
   }));
@@ -117,7 +105,6 @@ router.post("/create", async (req, res) => {
     slug,
   }).save();
 
-  // eslint-disable-next-line no-underscore-dangle
   return res.send(!!newBoard._id);
 });
 

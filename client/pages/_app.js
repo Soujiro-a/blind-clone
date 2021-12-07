@@ -5,6 +5,8 @@ import Layout from "../src/components/layout";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../src/store/modules/user";
+import cookies from "next-cookies";
+import setToken from "../server/tokenManager";
 
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
@@ -54,6 +56,12 @@ function MyApp({ Component, pageProps }) {
 }
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
+  const allCookies = cookies(ctx);
+  const tokenByCookie = allCookies["token"];
+  if (tokenByCookie) {
+    setToken(tokenByCookie);
+  }
+
   let pageProps = {};
 
   if (Component.getInitialProps) {

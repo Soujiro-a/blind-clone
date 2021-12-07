@@ -13,7 +13,6 @@ router.get("/:q", async (req, res) => {
   };
 
   if (lastIndex !== undefined) {
-    // eslint-disable-next-line no-underscore-dangle
     findOption._id = { $lt: lastIndex };
   }
 
@@ -26,15 +25,11 @@ router.get("/:q", async (req, res) => {
     });
 
   const formatedArticle = article.map((a) => ({
-    // eslint-disable-next-line no-underscore-dangle
     ...a._doc,
     author: {
-      // eslint-disable-next-line no-underscore-dangle
       ...a._doc.author._doc,
       nickname:
-        // eslint-disable-next-line no-underscore-dangle
         a._doc.author.nickname[0] +
-        // eslint-disable-next-line no-underscore-dangle
         "*".repeat(a._doc.author.nickname.length - 1),
     },
   }));

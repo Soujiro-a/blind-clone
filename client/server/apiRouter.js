@@ -15,8 +15,6 @@ const {
   user,
 } = require("./router");
 
-const SECRET = "N@1U!@*!0@N7$6N0&*&N!6(*AJE@J";
-
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -24,9 +22,6 @@ AWS.config.update({
 });
 
 const s3 = new AWS.S3();
-
-// JWT 시크릿 설정
-app.set("jwt-secret", SECRET);
 
 // 기능별 라우터 추가
 router.use("/article", article);

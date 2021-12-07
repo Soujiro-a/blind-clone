@@ -4,7 +4,7 @@
 
 ## :calendar: 1. 제작 기간 & 참여 인원
 
-- 2021.11.16 ~ 2021.11.30
+- 2021.11.16 ~ 현재
 - 개인 프로젝트
 
 ## :computer: 2. 사용 기술
@@ -61,12 +61,33 @@
 </details>
 
 <details>
-<summary>localStorage 사용 문제</summary>
+<summary>token 저장 문제</summary>
 <div markdown="1">
 
--
+- 초기에는 localStorage에 저장하고 있었습니다.
+- 그러나 getServerSideProps를 사용하여 데이터 Fetch를 시도할 때, localStorage에 접근할 수 없는 문제가 발생하였습니다.
+- localStorage 토큰 저장 -> cookie 토큰 저장으로 수정하였습니다.
 
-:pushpin: [참고 링크]()
+:pushpin: [참고 링크](https://lemontia.tistory.com/1012)
+:pushpin: [코드 확인]()
+
+</div>
+</details>
+
+<details>
+<summary>next-redux-wrapper 상태값 중첩 문제</summary>
+<div markdown="1">
+
+- next-redux-wrapper로 Hydrate를 시켜줄 때마다 값이 중첩되어 나오고 있었습니다.
+
+![redux 수정 전 상태](https://user-images.githubusercontent.com/68040092/144962247-d2557cd0-3cf1-4781-8d73-114e8f2579f4.png)
+
+- Hydrate를 할 때의 데이터를 항상 state와 action 모두 그대로 반환하는게 문제였습니다.
+- Hydrate단계에서 Object.assign 메소드를 사용하여 각 상태에 맞게 데이터를 수정한 후 반환해줌으로서 원하는 상태로 수정할 수 있었습니다.
+
+![redux 수정 후 상태](https://user-images.githubusercontent.com/68040092/144962721-8db505e4-348c-43ec-bddb-b6477e10178d.png)
+
+:pushpin: [참고 링크](https://lemontia.tistory.com/1012)
 :pushpin: [코드 확인]()
 
 </div>
