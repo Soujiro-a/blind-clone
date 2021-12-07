@@ -2,8 +2,10 @@ import styles from "../../../styles/components/Article/InputComment.module.css";
 import { AiOutlineCamera } from "react-icons/ai";
 import { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function InputComment({ enlarge = false, articleId }) {
+  const loginState = useSelector((state) => state.user);
   const [isLarge, setIsLarge] = useState(enlarge);
   const [content, setContent] = useState("");
 
@@ -24,7 +26,7 @@ export default function InputComment({ enlarge = false, articleId }) {
       },
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + loginState.token,
         },
       }
     );

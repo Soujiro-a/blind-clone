@@ -10,6 +10,7 @@ import { loginOpen, writing } from "../store/modules/modal";
 import { setUser } from "../store/modules/user";
 import styles from "../../styles/components/GNB.module.css";
 import classNames from "classnames";
+import { removeToken } from "../../server/tokenManager";
 
 export default function GNB() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function GNB() {
   function clickWritingButton() {
     if (!loginState.email) {
       dispatch(loginOpen());
+      return;
     }
     dispatch(writing(true));
   }
@@ -33,6 +35,7 @@ export default function GNB() {
   }
 
   function logout() {
+    removeToken();
     dispatch(setUser({ email: null, nickname: null }));
   }
   return (

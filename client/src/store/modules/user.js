@@ -15,6 +15,7 @@ export function setUser(payload) {
 const initState = {
   email: null,
   nickname: null,
+  token: null,
 };
 
 // 리듀서
@@ -24,11 +25,13 @@ export default function user(state = initState, action) {
       return Object.assign({}, state, {
         email: action.payload.user.email,
         nickname: action.payload.user.nickname,
+        token: action.payload.user.token,
       });
     case SET_USER:
       return Object.assign({}, state, {
         email: action.payload.email,
         nickname: action.payload.nickname,
+        token: action.payload.token,
       });
     default:
       return state;

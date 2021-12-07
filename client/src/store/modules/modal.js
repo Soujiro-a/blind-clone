@@ -43,8 +43,8 @@ export default function modal(state = initState, action) {
   switch (action.type) {
     case HYDRATE:
       return Object.assign({}, state, {
-        email: action.payload.modal.email,
-        nickname: action.payload.modal.nickname,
+        login: action.payload.modal.login,
+        writing: action.payload.modal.writing,
       });
     case LOGIN_OPEN:
       return Object.assign({}, state, {

@@ -15,6 +15,7 @@ export default function Writing() {
   const dispatch = useDispatch();
   const imgref = useRef();
   const writingModalState = useSelector((state) => state.modal.writing);
+  const loginState = useSelector((state) => state.user);
   const [boardList, setBoardList] = useState([]);
   const [currentSelectedBoard, setCurrentSelectedBoard] = useState(0);
   const [isBoardSelected, setIsBoardSelected] = useState(false);
@@ -82,7 +83,7 @@ export default function Writing() {
       },
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + loginState.token,
         },
       }
     );

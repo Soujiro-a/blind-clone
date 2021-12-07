@@ -6,7 +6,7 @@ import Image from "next/image";
 import styles from "../../../styles/components/modal/Login.module.css";
 import cancelImg from "../../../public/images/cancel.png";
 import axios from "axios";
-import setToken from "../../../server/tokenManager";
+import { setToken } from "../../../server/tokenManager";
 
 export default function Login() {
   const dispatch = useDispatch();

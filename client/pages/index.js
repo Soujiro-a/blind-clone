@@ -44,11 +44,23 @@ const Home = ({ mainContent, boardList, famousCompanyList }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, res, ...etc }) => {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/user/token`
-      );
-      store.dispatch(setUser({ email: data.email, nickname: data.nickname }));
-
+      if (req.cookies.token) {
+        const { data } = await axios.get(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/token`,
+          {
+            headers: {
+              Authorization: "Bearer " + req.cookies.token,
+            },
+          }
+        );
+        store.dispatch(
+          setUser({
+            email: data.email,
+            nickname: data.nickname,
+            token: data.token,
+          })
+        );
+      }
       let { data: contentData } = await axios.get(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/board/main`
       );
