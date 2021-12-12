@@ -67,6 +67,8 @@
 - 초기에는 localStorage에 저장하고 있었습니다.
 - 그러나 getServerSideProps를 사용하여 데이터 Fetch를 시도할 때, localStorage에 접근할 수 없는 문제가 발생하였습니다.
 - localStorage 토큰 저장 -> cookie 토큰 저장으로 수정하였습니다.
+- 그리고, 사이트에 처음 엑세스 할 때 쿠키에 접근하여 토큰 값을 redux에 유저 상태값으로 저장하였습니다.
+  - 해당 토큰을 axios 요청 시에 헤더에 담아 요청을 보내어 토큰을 해석하여 사용할 수 있게끔 하였습니다.
 
 :pushpin: [참고 링크](https://lemontia.tistory.com/1012)
 :pushpin: [코드 확인]()
@@ -88,7 +90,6 @@
 ![redux 수정 후 상태](https://user-images.githubusercontent.com/68040092/144962721-8db505e4-348c-43ec-bddb-b6477e10178d.png)
 
 :pushpin: [참고 링크](https://lemontia.tistory.com/1012)
-:pushpin: [코드 확인]()
 
 </div>
 </details>

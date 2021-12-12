@@ -69,7 +69,7 @@ export default function GNB() {
           </Link>
         </div>
         <div className={styles["side-block"]}>
-          <SmallSearchbar />
+          {/* <SmallSearchbar /> */}
           <a
             onClick={() => clickWritingButton()}
             className={styles["write-btn"]}

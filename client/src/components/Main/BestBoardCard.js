@@ -28,19 +28,36 @@ export default function BestBoardCard({ articleList, boardList }) {
               <li key={article._id}>
                 <div className={styles["article-title"]}>
                   <span className={styles["board-tag"]}>
-                    {boardList[article.board]}
+                    <Link
+                      href={`/topics/${encodeURIComponent(
+                        boardList[article.board]
+                      )}`}
+                      passHref
+                    >
+                      {boardList[article.board]}
+                    </Link>
                   </span>
-                  {article.title}
+                  <Link
+                    href={`/post/${encodeURIComponent(article.key)}`}
+                    passHref
+                  >
+                    {article.title}
+                  </Link>
                 </div>
                 <div className={styles["count-display"]}>
                   <div className={styles["count-item"]}>
                     <MdThumbUp className={styles["icon"]} />
                     <span>{article.thumbupCount}</span>
                   </div>
-                  <div className={styles["count-item"]}>
-                    <FaRegComment className={styles["icon"]} />
-                    <span>{article.commentCount}</span>
-                  </div>
+                  <Link
+                    href={`/post/${encodeURIComponent(article.key)}`}
+                    passHref
+                  >
+                    <a className={styles["count-item"]}>
+                      <FaRegComment className={styles["icon"]} />
+                      <span>{article.commentCount}</span>
+                    </a>
+                  </Link>
                 </div>
               </li>
             );
