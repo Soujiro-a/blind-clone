@@ -1,10 +1,13 @@
 .board-card.best {
+  margin-bottom: 60px;
 }
 
 .head {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 50px;
+  border-bottom: solid 2px #e0e0e0;
 }
 
 .head > a {
@@ -55,9 +58,10 @@
 
 .board-tag {
   font-size: 12px;
-  border: solid 1px #94969b;
+  border: solid 1px #d0d0d3;
   color: #94969b;
   margin-right: 5px;
   position: relative;
   top: -2px;
+  padding: 1px 3px;
 }

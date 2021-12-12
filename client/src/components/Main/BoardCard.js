@@ -19,7 +19,14 @@ export default function BoardCard({ title, slug, articleList }) {
           {articleList.map((article) => {
             return (
               <li key={article._id}>
-                <span className={styles["article-title"]}>{article.title}</span>
+                <span className={styles["article-title"]}>
+                  <Link
+                    href={`/post/${encodeURIComponent(article.key)}`}
+                    passHref
+                  >
+                    {article.title}
+                  </Link>
+                </span>
                 <div className={styles["count-display"]}>
                   <div className={styles["count-item"]}>
                     <BsEye className={styles["icon"]} />
