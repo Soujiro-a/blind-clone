@@ -43,7 +43,7 @@
   - 데이터를 게시판의 고유 id 순서대로 정렬하여 받아옴으로서 해결하였습니다.
 ```
 
-:pushpin: [코드 확인](https://github.com/Soujiro-a/blind-clone/blob/9aeca319e72d013f7ab9a4073bfef480a5835d21/client/server/router/board.js#L32)
+:pushpin: [코드 확인](https://bit.ly/3oLRyqP)
 
 </div>
 </details>
@@ -59,7 +59,7 @@
 ```
 
 :pushpin: [참고 링크](https://github.com/ramiel/mongoose-sequence/issues/100)
-:pushpin: [코드 확인](https://github.com/Soujiro-a/blind-clone/blob/9aeca319e72d013f7ab9a4073bfef480a5835d21/client/mongoose/schema/article.js#L27)
+:pushpin: [코드 확인](https://bit.ly/3GCJnTJ)
 
 </div>
 </details>
@@ -72,13 +72,13 @@
 - 사이트 방문시에 토큰을 확인하고 로그인 상태로 변환시키기위해 getServerSideProps 단계에서 데이터 Fetch를 시도하였지만, 해당 단계에서는 localStorage에 접근할 수 없었습니다.
 - 그래서 로그인 시 localStorage 토큰 저장 -> cookie 토큰 저장으로 수정하였습니다.
   :pushpin: [참고 링크](https://lemontia.tistory.com/1012)
-  :pushpin: [토큰 생성, 제거 함수 코드 확인](https://github.com/Soujiro-a/blind-clone/blob/main/client/server/tokenManager.js)
-  :pushpin: [클라이언트 쿠키 저장 코드 확인](https://github.com/Soujiro-a/blind-clone/blob/9aeca319e72d013f7ab9a4073bfef480a5835d21/client/pages/_app.js#L17)
+  :pushpin: [토큰 생성, 제거 함수 코드 확인](https://bit.ly/3dKy1Rq)
+  :pushpin: [클라이언트 쿠키 저장 코드 확인](https://bit.ly/3pTsddF)
   <br>
 
 - 해당 토큰을 axios 요청 시에 헤더에 담아 요청을 보내어 토큰을 해석하여 사용할 수 있게끔 하였습니다.
 - 그리고, 사이트에 처음 엑세스 할 때 쿠키에 접근하여 토큰 값을 redux에 유저 상태값으로 저장하였습니다.
-  :pushpin: [코드 확인](https://github.com/Soujiro-a/blind-clone/blob/9aeca319e72d013f7ab9a4073bfef480a5835d21/client/pages/index.js#L47)
+  :pushpin: [코드 확인](https://bit.ly/31M2yfg)
 
 </div>
 </details>
@@ -97,7 +97,7 @@
 ![redux 수정 후 상태](https://user-images.githubusercontent.com/68040092/144962721-8db505e4-348c-43ec-bddb-b6477e10178d.png)
 
 :pushpin: [참고 링크](https://lemontia.tistory.com/1012)
-:pushpin: [코드 확인](https://github.com/Soujiro-a/blind-clone/blob/9aeca319e72d013f7ab9a4073bfef480a5835d21/client/src/store/modules/user.js#L24)
+:pushpin: [코드 확인](https://bit.ly/3Guy7ZE)
 
 </div>
 </details>
